@@ -1,23 +1,20 @@
 package ua.com.foxminded.core;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TextAnalyser {
-    public TextData analyseString(String text) throws BlankTextException {
+    public Map<Character, Integer> analyseString(String text) {
 	if (text.equals(""))
-	    throw new BlankTextException();
+	    return new LinkedHashMap<>();
 	ApplicationCache applicationCache = ApplicationCache.getApplicationCache();
-	TextData textData;
 	if (applicationCache.containsResultInCache(text)) {
-	    textData = applicationCache.getDataFromCache(text);
+	    return applicationCache.getDataFromCache(text);
 	} else {
 	    LinkedHashMap<Character, Integer> analysingData = fillData(text);
-	    textData = new TextData();
-	    textData.setAnalysingData(analysingData);
-	    applicationCache.writeDataInCache(text, textData);
+	    applicationCache.writeDataInCache(text, analysingData);
+	    return analysingData;
 	}
-
-	return textData;
     }
 
     private LinkedHashMap<Character, Integer> fillData(String text) {

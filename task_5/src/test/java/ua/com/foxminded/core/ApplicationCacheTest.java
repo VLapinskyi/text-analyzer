@@ -3,13 +3,15 @@ package ua.com.foxminded.core;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.LinkedHashMap;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ApplicationCacheTest {
 
     private ApplicationCache applicationCache;
-    private TextData textData;
+    LinkedHashMap<Character, Integer> data;
     private String textKey;
 
     @BeforeEach
@@ -19,20 +21,20 @@ class ApplicationCacheTest {
 
     @BeforeEach
     void prepareDataForCache() {
-	textData = new TextData();
+	data = new LinkedHashMap<Character, Integer>();
 	textKey = "some key";
     }
 
     @Test
-    void shouldContaintObjectInCache() {
-	applicationCache.writeDataInCache(textKey, textData);
+    void shouldContaintMapInCache() {
+	applicationCache.writeDataInCache(textKey, data);
 	assertTrue(applicationCache.containsResultInCache(textKey));
     }
 
     @Test
-    void shouldReadObjectWithExistingKey() {
-	applicationCache.writeDataInCache(textKey, textData);
-	assertEquals(textData, applicationCache.getDataFromCache(textKey));
+    void shouldReadMapWithExistingKey() {
+	applicationCache.writeDataInCache(textKey, data);
+	assertEquals(data, applicationCache.getDataFromCache(textKey));
     }
 
 }

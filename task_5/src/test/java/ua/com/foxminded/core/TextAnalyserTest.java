@@ -23,25 +23,24 @@ class TextAnalyserTest {
     }
 
     @Test
-    void shouldThrowBlankTextException() {
-	assertThrows(BlankTextException.class, () -> textAnalyser.analyseString(""));
+    void shouldReturnEmptyMap() {
+	LinkedHashMap<Character, Integer> expectingData = new LinkedHashMap<>();
+	assertEquals(expectingData, textAnalyser.analyseString(""));
     }
 
     @Test
     void shouldReturnCorrectResut() throws BlankTextException {
-	TextData expectingTextData = new TextData();
-	LinkedHashMap<Character, Integer> analysingData = new LinkedHashMap<>();
-	analysingData.put('h', 1);
-	analysingData.put('e', 1);
-	analysingData.put('l', 3);
-	analysingData.put('o', 2);
-	analysingData.put(' ', 1);
-	analysingData.put('w', 1);
-	analysingData.put('r', 1);
-	analysingData.put('d', 1);
-	analysingData.put('!', 1);
-	expectingTextData.setAnalysingData(analysingData);
+	LinkedHashMap<Character, Integer> expectingData = new LinkedHashMap<>();
+	expectingData.put('h', 1);
+	expectingData.put('e', 1);
+	expectingData.put('l', 3);
+	expectingData.put('o', 2);
+	expectingData.put(' ', 1);
+	expectingData.put('w', 1);
+	expectingData.put('r', 1);
+	expectingData.put('d', 1);
+	expectingData.put('!', 1);
 
-	assertEquals(expectingTextData, textAnalyser.analyseString("hello world!"));
+	assertEquals(expectingData, textAnalyser.analyseString("hello world!"));
     }
 }
