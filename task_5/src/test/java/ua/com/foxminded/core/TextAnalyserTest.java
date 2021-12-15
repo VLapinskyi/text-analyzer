@@ -29,7 +29,7 @@ class TextAnalyserTest {
     }
 
     @Test
-    void shouldReturnCorrectResut() throws BlankTextException {
+    void shouldReturnCorrectResut() {
 	LinkedHashMap<Character, Integer> expectingData = new LinkedHashMap<>();
 	expectingData.put('h', 1);
 	expectingData.put('e', 1);
